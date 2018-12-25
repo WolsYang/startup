@@ -1,0 +1,32 @@
+<h1>候選人列表</h1>
+
+  <%= link_to "新增任務", new_mission_path %>
+
+  <table>
+    <thead>
+      <tr>
+        <td>任務名稱</td>
+        <td>類別</td>
+        <td>內容</td>
+        <td>進度</td>
+		<td>重要度</td>
+		<td>截止日</td>
+		<td>負責人</td>
+		<td>成員數</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @missions.each do |mission| %>
+      <tr>
+        <td><%= mission.name %>
+        <td><%= mission.kind %></td>
+        <td><%= mission.content %></td>
+        <td><%= mission.state %></td>
+		<td><%= mission.level %></td>
+		<td><%= mission.end_date %></td>
+		<td><%= mission.supervisor %></td>
+		<td><%= mission.users.count %></td>		
+      </tr>
+      <% end %>
+    </tbody>
+  </table>

@@ -1,0 +1,29 @@
+  <h1>新增任務</h1>
+
+  <%= form_for(@mission) do |f| %>
+    <%= f.label :name, "任務名稱" %>
+    <%= f.text_field :name %> <br />
+
+    <%= f.label :kind, "類別" %>
+    <%= f.text_field :kind %> <br />
+
+    <%= f.label :content, "內容" %>
+    <%= f.text_field :content %> <br />
+
+    <%= f.label :state, "進度" %>
+    <%= f.text_area :state %> <br />
+
+	<%= f.label :level, "重要度" %>
+    <%= f.text_area :level %> <br />
+	
+    <%= f.label :end_date, "截止日" %>
+    <%= f.text_area :end_date %> <br />
+	
+	<%= f.label :supervisor, "負責人" %>
+    <%= f.text_area :state %> <br />
+	
+    <%= f.submit %>
+  <% end %>
+
+  <br />
+  <%= link_to '回任務列表', missions_path %>
