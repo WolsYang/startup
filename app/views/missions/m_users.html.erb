@@ -1,6 +1,6 @@
-<h1>人員列表</h1>
+<h1><%= @mission.name %>人員列表</h1>
 
-  <%= link_to "新增人員", new_user_path %>
+  <%= link_to "新增人員","#" %>
 
   <table>
     <thead>
@@ -17,12 +17,12 @@
 	    <td><%= user.name %>
         <td><%= user.email %></td>
         <td><%= user.root %></td>
-		<td><%= link_to user.missions.size, u_missions_user_path(user), method: "get" %></td>
+		<td><%= link_to user.missions.size, u_missions_user_path, method: "get" %></td>
         <td>
-          <%= link_to "編輯", edit_user_path(user) %>
-          <%= link_to "刪除", user_path(user), method: "delete", data: { confirm: "確認刪除" } %>
+        <%= link_to "刪除", rm_user_mission_path(user), method: "delete", data: { confirm: "確認刪除" } %>
         </td>		
       </tr>
       <% end %>
     </tbody>
   </table>
+

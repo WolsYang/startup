@@ -1,6 +1,7 @@
-<h1>任務列表</h1>
+<h1><%= @user.name %>任務列表</h1>
 
-  <%= link_to "新增任務", new_mission_path %><%= link_to "人員列表", users_path %>
+
+  <%= link_to "新增任務", "#" %>
 
   <table>
     <thead>
@@ -27,9 +28,8 @@
 		<td><%= mission.supervisor %></td>
 		<td><%= link_to mission.users.size, m_users_mission_path(mission), method: "get" %></td>
         <td>
-          <%= link_to "編輯", edit_mission_path(mission) %>
-          <%= link_to "刪除", mission_path(mission), method: "delete", data: { confirm: "確認刪除" } %>
-        </td>		
+		<%= link_to "刪除", rm_mission_user_path(mission), method: "delete", data: { confirm: "確認刪除" } %>
+		</td>		
       </tr>
       <% end %>
     </tbody>
