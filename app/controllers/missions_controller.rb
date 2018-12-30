@@ -42,18 +42,17 @@ class MissionsController < ApplicationController
 	#試試把目前的任務先記錄下來
 	def m_users
 		@users = @mission.users.all
+		@now_mission = Mission.find(params[:id])
 		#return @mission  #為什麼不能回傳
 	end
 	
 	def rm_user #為啥抓不到m_user
-	  user = User.find(params[:id])
-	  mission = Mission.find_by(id: params[mission_id]) 
-	  #if mission
-	  User.mission.delete(mission)
-	  #user = Mission.where(user_id: params[:id], mission_id: @mission.id)
-	  #@mission.users.find.delete(@user) #if @mission
-      #redirect_to missions_path, notice: "人員已刪除!"
-	  #end
+	  user = User.find(2)
+	  mission = Mission.find(1)
+	  if mission
+	  mission.users.destroy(user)
+	  end
+	  #redirect_to missions_path, notice: "任務資料已刪除!"
 	end
 	
 	private
