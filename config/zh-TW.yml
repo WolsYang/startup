@@ -1,0 +1,31 @@
+"zh-TW":
+  Success: 成功
+  Fail: 失敗
+  Delete:刪除
+  Confirm Delete: 確認刪除
+  Edit:編輯
+  
+  view:
+    Edit Mission: 編輯任務
+	Edit User: 編輯人員
+    Add a Mission: 新增任務
+	Add a User: 新增人員
+    To Mission Bord: 回任務列表
+	To User List:人員列表
+  
+    Add a User: 新增人員
+	Name: 名稱
+	Email: 電子郵件
+	Root: 權限
+	Mission's: 任務數
+	
+	Mission Name: 任務名稱
+	Type: 類別
+	Information: 內容
+    schedule: 進度
+	Important Level: 重要度
+	End Day: 截止日
+	Supervisor: 負責人
+	User's: 成員數
+	
+	

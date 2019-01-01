@@ -14,7 +14,7 @@ class MissionsController < ApplicationController
 		
 		if @mission.save
 			#成功
-			redirect_to missions_path, notice: "新增任務成功"
+			redirect_to missions_path, notice: "QWERETY"
 		else
 			#失敗
 		render :new

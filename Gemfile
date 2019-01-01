@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.5'
 
+gem "rails-i18n"
+
 group :test, :development do
   gem "rspec-rails"
   gem 'faker'
