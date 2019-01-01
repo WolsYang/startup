@@ -3,6 +3,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.5'
 
+group :test, :development do
+  gem "rspec-rails"
+  gem 'faker'
+end
+
+group :test do
+  gem 'fabrication'
+end
+
 gem 'pg'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

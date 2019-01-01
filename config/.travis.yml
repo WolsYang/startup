@@ -1,0 +1,23 @@
+before_script：
+  -  cp config / database.yml.travis config / database.yml 
+  -  psql -c'create database travis_ci_test;' -U postgres
+
+dist: trust
+
+language: ruby
+
+rvm:
+#要測試的版本  
+  - 2.4.5
+  
+matrix:
+  fast_finish: true
+  allow_failures:
+  #什麼情況允許失敗
+  
+script: 
+  -  bundle exec rails db：migrate RAILS_ENV = test 
+  -  bundle exec rspec
+  
+ services：
+  -  redis-server

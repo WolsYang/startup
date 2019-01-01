@@ -38,6 +38,7 @@ class MissionsController < ApplicationController
       @mission.destroy if @mission
       redirect_to missions_path, notice: "任務資料已刪除!"
     end
+	
 	#list mission's user
 	#試試把目前的任務先記錄下來
 	def m_users
