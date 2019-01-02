@@ -2,7 +2,8 @@ class MissionsController < ApplicationController
 	 before_action :find_mission, only: [:edit, :update, :destroy, :m_users]
 
 	def index
-		@missions = Mission.all
+		#@missions = Mission.all
+		@missions =Mission.order(created_at: :desc)
 	end
 	#C
 	def new
