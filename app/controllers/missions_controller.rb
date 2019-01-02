@@ -48,8 +48,8 @@ class MissionsController < ApplicationController
 	end
 	
 	def rm_user #為啥抓不到m_user
-	  user = User.find(2)
-	  mission = Mission.find(1)
+	  user = User.find(params[:id])
+	  mission = Mission.find(params[:mission_id])
 	  if mission
 	  mission.users.destroy(user)
 	  end

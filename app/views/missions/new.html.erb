@@ -1,6 +1,6 @@
-  <h1>新增任務</h1>
+  <h1><%= t("view.add")+t(view.user) %></h1>
 
   <%= render "mission_form", mission: @mission %>
 
   <br />
-  <%= link_to '回任務列表', missions_path %>
+  <%= link_to t("to")+t(view.mission), missions_path %>

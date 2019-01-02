@@ -1,6 +1,6 @@
-  <h1>編輯人員</h1>
+  <h1><%= t("edit") + t("view.user") %></h1>
 
   <%= render "user_form", user: @user %>
 
   <br />
-  <%= link_to '回任務列表', users_path %>
+  <%= link_to t("to") + t("view.user") + t("list"), users_path %>

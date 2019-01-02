@@ -1,14 +1,14 @@
-<h1><%= @mission.name %>人員列表</h1>
+<h1><%= @mission.name + t("view.user") + t("list") %></h1>
 
-  <%= link_to "新增人員","#" %>
+  <%= link_to t("add")+t("view.user"), "#" %>
 
   <table>
     <thead>
       <tr>
-        <td>名稱</td>
-        <td>電子郵件</td>
-        <td>權限</td>
-		<td>任務數</td>
+        <td>t("name")</td>
+        <td>t("view.email")</td>
+        <td>t("view.root")</td>
+		<td>t("view.missions")</td>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
         <td><%= user.root %></td>
 		<td><%= link_to user.missions.size, u_missions_user_path, method: "get" %></td>
         <td>
-        <%= link_to "刪除", rm_user_mission_path(user), method: "delete", data: { confirm: "確認刪除" } %>
+        <%= link_to t("delete"), mission_user_path(user), method: "delete", data: { confirm: t("confirm_delete") } %>
         </td>		
       </tr>
       <% end %>

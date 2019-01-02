@@ -1,11 +1,11 @@
   <%= form_for(user) do |f| %>
-    <%= f.label :name, "姓名" %>
+    <%= f.label :name, t("name") %>
     <%= f.text_field :name %> <br />
 
-    <%= f.label :email, "電子郵件" %>
+    <%= f.label :email, t("view.email") %>
     <%= f.text_field :email %> <br />
 
-    <%= f.label :root, "權限" %>
+    <%= f.label :root, t("view.root") %>
     <%= f.text_field :root %> <br />
 	
     <%= f.submit %>

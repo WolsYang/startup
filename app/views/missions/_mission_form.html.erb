@@ -1,23 +1,23 @@
   <%= form_for(mission) do |f| %>
-    <%= f.label :name, "任務名稱" %>
+    <%= f.label :name, t("view.mission") + t("name") %>
     <%= f.text_field :name %> <br />
 
-    <%= f.label :kind, "類別" %>
+    <%= f.label :kind, t("view.type") %>
     <%= f.text_field :kind %> <br />
 
-    <%= f.label :content, "內容" %>
+    <%= f.label :content, t("view.information") %>
     <%= f.text_field :content %> <br />
 
-    <%= f.label :state, "進度" %>
+    <%= f.label :state, t("view.state") %>
     <%= f.text_area :state %> <br />
 
-	<%= f.label :level, "重要度" %>
+	<%= f.label :level, t("view.important_level") %>
     <%= f.text_area :level %> <br />
 	
-    <%= f.label :end_date, "截止日" %>
+    <%= f.label :end_date, t("view.end_day") %>
     <%= f.text_area :end_date %> <br />
 	
-	<%= f.label :supervisor, "負責人" %>
+	<%= f.label :supervisor, t("view.supervisor") %>
     <%= f.text_area :state %> <br />
 	
     <%= f.submit %>

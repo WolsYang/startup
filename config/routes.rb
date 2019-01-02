@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :missions do
     get :m_users, on: :member
 	delete :rm_user, on: :member
+	resources :users
   end
   resources :users do
 	get :u_missions, on: :member

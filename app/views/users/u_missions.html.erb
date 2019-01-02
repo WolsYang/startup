@@ -1,19 +1,19 @@
-<h1><%= @user.name %>任務列表</h1>
+<h1><%= @user.name + t("view.mission") + t("list") %>任務列表</h1>
 
 
-  <%= link_to "新增任務", "#" %>
+  <%= link_to t("add") + t("view.mission"), "#" %>
 
   <table>
     <thead>
       <tr>
-        <td>任務名稱</td>
-        <td>類別</td>
-        <td>內容</td>
-        <td>進度</td>
-		<td>重要度</td>
-		<td>截止日</td>
-		<td>負責人</td>
-		<td>成員數</td>
+        <td><%= t("view.mission") + t("name") %></td>
+        <td><%= t("view.type") %></td>
+        <td><%= t("view.information") %></td>
+        <td><%= t("view.state") %></td>
+		<td><%= t("view.important_level") %></td>
+		<td><%= t("view.end_day") %></td>
+		<td><%= t("view.supervisor") %></td>
+		<td><%= t("view.users") %></td>
       </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@
 		<td><%= mission.supervisor %></td>
 		<td><%= link_to mission.users.size, m_users_mission_path(mission), method: "get" %></td>
         <td>
-		<%= link_to "刪除", rm_mission_user_path(mission), method: "delete", data: { confirm: "確認刪除" } %>
+		<%= link_to t("delete"), rm_mission_user_path(mission), method: "delete", data: { t("confirm_delete") } %>
 		</td>		
       </tr>
       <% end %>

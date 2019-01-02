@@ -1,0 +1,27 @@
+zh-TW:
+  success: 成功
+  fail: 失敗
+  delete: 刪除
+  confirm_Delete: 確認刪除
+  edit: 編輯
+  add: 新增
+  to: 回
+  list: 列表
+  name: 名稱
+  
+  view:
+    user: 人員
+    mission: 任務
+      
+    
+    email: 電子郵件
+    root: 權限
+    missions: 任務數
+
+    type: 類別
+    information: 內容
+    state: 進度
+    important_level: 重要度
+    end_day: 截止日
+    supervisor: 負責人
+    users: 成員數
