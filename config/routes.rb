@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "missions#index"
-  #get "/new", to: redirect('/missions/new')
-  #get "/add_uer", to: redirect('/missions/add_user')
+  get 'signup' => 'users#signup',:as => 'signup'
   
   resources :missions do
     get :m_users, on: :member
-	delete :rm_user, on: :member
-	resources :users
+	post :add_user_to , on: :member 
+	resources :rm_user, only: [:destroy], :controller => "missions", :action => "rm_user"
   end
   resources :users do
 	get :u_missions, on: :member
-	delete :rm_mission, on: :member
+	post :add_mission_to , on: :member 
+	resources :rm_mission, only: [:destroy], :controller => "users", :action => "rm_mission"
   end	
 end

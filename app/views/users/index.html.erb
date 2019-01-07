@@ -1,14 +1,14 @@
 <h1><%= t("view.user") + t("list") %></h1>
 
-  <%= link_to t("add) + t("user"), new_user_path %>
+  <%= link_to t("add") + t("view.user"), new_user_path %>
 
   <table>
     <thead>
       <tr>
-        <td>t("name")</td>
-        <td>t("view.email")</td>
-        <td>t("view.root")</td>
-		<td>t("view.missions")</td>
+        <td><%= t("name") %></td>
+        <td><%= t("view.email") %></td>
+        <td><%= t("view.root") %></td>
+		<td><%= t("view.missions") %></td>
       </tr>
     </thead>
     <tbody>

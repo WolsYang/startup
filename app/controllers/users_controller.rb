@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	 before_action :find_user, only: [:edit, :update, :destroy, :add_user]
+	 before_action :find_user, only: [:edit, :update, :destroy, :add_user, :add_mission_to]
+	 before_action :chek_mission_state, only: [:add_mission_to]
 
 	def index
 		@users = User.all
@@ -50,17 +51,38 @@ class UsersController < ApplicationController
 	end
 	
 	def rm_mission
-	  @mission = Mission.find_by(user_id: params[:id])
-	  @mission.destroy if @mission
+	  work = Work.find_by(mission_id: params[:id], user_id: params[:user_id])
+	  work.destroy
       redirect_to missions_path, notice: "人員已刪除!"
+	end
+	
+	def add_mission_to
+		unless Work.exists?(mission_id: @mission_id , user_id: params[:id]) == true
+			@user.missions << @mission
+			redirect_to u_missions_user_path, notice: "新增任務成功"		
+		else
+			redirect_to u_missions_user_path, notice: "任務已存在"
+		end
 	end
 	
 	private
     def user_params
-      params.require(:user).permit(:name, :email, :root, :mission_id)
+      params.require(:user).permit(:name, :email, :root, :mission_ids, :user)
     end
 	
 	def find_user
 		@user = User.find_by(id: params[:id])
 	end
+	
+	def chek_mission_state
+		if params[:mission][:name].blank? 
+			@mission = Mission.find_by(id: params[:user][:mission_ids])
+			@mission_id = @mission.id
+		elsif Mission.exists?(name: params[:mission][:name]) == true
+			@mission = Mission.find_by("name = ?", params[:mission][:name])	
+			@mission_id = @mission.id
+		elsif Mission.exists?(name: params[:mission][:name]) == false
+			redirect_to u_missions_user_path, notice: "此任務不存在"
+		end
+	end	
 end

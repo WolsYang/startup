@@ -1,25 +1,33 @@
 <h1><%= @mission.name + t("view.user") + t("list") %></h1>
 
-  <%= link_to t("add")+t("view.user"), "#" %>
+  	<%= form_tag add_user_to_mission_path do %>
+	
+	<%= search_field(:user, :name) %><%= t("or") %>
+	
+	<%= collection_select(:mission, :user_ids, User.all, :id, :name) %>
+	
+    <%= submit_tag "新增人員" %>
+	
+	<% end %>
 
   <table>
     <thead>
       <tr>
-        <td>t("name")</td>
-        <td>t("view.email")</td>
-        <td>t("view.root")</td>
-		<td>t("view.missions")</td>
+        <td><%= t("name") %></td>
+        <td><%= t("view.email") %></td>
+        <td><%= t("view.root") %></td>
+		<td><%= t("view.missions") %></td>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
       <tr>
-	    <td><%= user.name %>
+	    <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.root %></td>
-		<td><%= link_to user.missions.size, u_missions_user_path, method: "get" %></td>
+		<td><%= link_to user.missions.size, u_missions_user_path(user), method: "get" %></td>
         <td>
-        <%= link_to t("delete"), mission_user_path(user), method: "delete", data: { confirm: t("confirm_delete") } %>
+        <%= link_to t("delete"), mission_rm_user_path(@mission, user), method: "delete", data: { confirm: t("confirm_delete") } %>
         </td>		
       </tr>
       <% end %>

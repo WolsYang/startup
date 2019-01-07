@@ -6,19 +6,30 @@
     <%= f.text_field :kind %> <br />
 
     <%= f.label :content, t("view.information") %>
-    <%= f.text_field :content %> <br />
-
-    <%= f.label :state, t("view.state") %>
-    <%= f.text_area :state %> <br />
+    <%= f.text_area :content %> <br />
+	
+	<%= f.label :state, t("view.state") %>
+	<%= f.select(:state, [['待處理', 1], ['進行中', 2], ['已結束', 3]]) %><br />
 
 	<%= f.label :level, t("view.important_level") %>
-    <%= f.text_area :level %> <br />
+	<%= f.select(:level, [['首要', 1], ['優先', 2], ['可延宕', 3], ['無DL', 4]]) %><br />
 	
     <%= f.label :end_date, t("view.end_day") %>
-    <%= f.text_area :end_date %> <br />
+	<%= date_select :mission, :end_date %><br/>
 	
 	<%= f.label :supervisor, t("view.supervisor") %>
-    <%= f.text_area :state %> <br />
+    <%= f.text_field :supervisor %> <br />
+
+	<% if @mission.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@mission.errors.count, "error") %> 錯誤:</h2>
+		
+	<ul>
+	<% mission.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+	</ul>
+	<% end %>
 	
     <%= f.submit %>
   <% end %>

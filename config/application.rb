@@ -21,7 +21,7 @@ module Startup
 	# use default locale when translation missing
 	config.i18n.fallbacks = true
 
-	config.time_zone = “Taipei”
+	config.time_zone = "Taipei"
 	
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
