@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 	before_action :find_user, only: [:edit, :update, :destroy, :add_user, :add_mission_to]
 	before_action :chek_mission_state, only: [:add_mission_to]
-	before_action :check_login, except: [:login, :login, :signup, :create_login_session ]
-	layout "login", only: [:login, :signup]
+	before_action :check_login, except: [:login, :login, :signup, :create_login_session, :create ]
+	layout "login", only: [:login, :signup, :create_login_session]
 	
 	def  index	
 		@users = User.all
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 		  session[:user_id]=user.id
 		  redirect_to root_path
 		else
-		  redirect_to :login
+		  redirect_to :login, notice: "沒有找到您的資料喔"
 		end
 	end
 
@@ -32,13 +32,15 @@ class UsersController < ApplicationController
 	
 	
 	def create
+		puts "777777"
 		@user = User.new(user_params)
+		puts "888888"
 		if @user.save
 			#成功
-			redirect_to users_path, notice: "新增人員成功"
+			redirect_to :login, notice: "新增人員成功"
 		else
 			#失敗
-		render :new
+		render :signup, notice: "新增人員失敗"
 		end
 	end
 	#U
