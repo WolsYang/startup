@@ -1,12 +1,12 @@
-  <%= form_for(user) do |f| %>
-    <%= f.label :name, t("name") %>
-    <%= f.text_field :name %> <br />
+<%= form_for @user do |f| %>
+  <%= f.label :name, '用戶名' %><br />
+  <%= f.text_field :name %><br />
+  <%= f.label :email, 'Email' %><br />
+  <%= f.text_field :email %><br />
+  <%= f.label :password, '密碼' %><br />
+  <%= f.password_field :password %><br />
+  <%= f.label :password_confirmation, '確認密碼' %><br />
+  <%= f.password_field :password_confirmation %><br />
+  <%= f.submit '送出' %>
 
-    <%= f.label :email, t("view.email") %>
-    <%= f.text_field :email %> <br />
-
-    <%= f.label :root, t("view.root") %>
-    <%= f.text_field :root %> <br />
-	
-    <%= f.submit %>
-  <% end %>
+<% end %>

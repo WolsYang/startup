@@ -1,4 +1,5 @@
 class MissionsController < ApplicationController
+	before_action :check_login
 	before_action :find_mission, only: [:edit, :update, :destroy, :m_users, :add_user_to]
 	before_action :chek_user_state, only: [:add_user_to]
 	def index

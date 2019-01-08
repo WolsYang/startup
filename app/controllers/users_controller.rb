@@ -1,18 +1,38 @@
 class UsersController < ApplicationController
-	 before_action :find_user, only: [:edit, :update, :destroy, :add_user, :add_mission_to]
-	 before_action :chek_mission_state, only: [:add_mission_to]
-
-	def index
+	before_action :find_user, only: [:edit, :update, :destroy, :add_user, :add_mission_to]
+	before_action :chek_mission_state, only: [:add_mission_to]
+	before_action :check_login, except: [:login, :login, :signup, :create_login_session ]
+	layout "login", only: [:login, :signup]
+	
+	def  index	
 		@users = User.all
 	end
-	#C
-	def new
-		@user = User.new
+	
+	def signup
+		@user=User.new
 	end
+	
+	def login
+	end
+	
+	def create_login_session
+	user =User.find_by_email(params[:email])
+		if user && user.authenticate(params[:password])
+		  session[:user_id]=user.id
+		  redirect_to root_path
+		else
+		  redirect_to :login
+		end
+	end
+
+	def logout
+		session[:user_id]=nil
+		redirect_to login_path
+	end
+	
 	
 	def create
 		@user = User.new(user_params)
-		
 		if @user.save
 			#成功
 			redirect_to users_path, notice: "新增人員成功"
@@ -67,7 +87,7 @@ class UsersController < ApplicationController
 	
 	private
     def user_params
-      params.require(:user).permit(:name, :email, :root, :mission_ids, :user)
+      params.require(:user).permit(:name, :email, :root, :mission_ids, :user, :password)
     end
 	
 	def find_user

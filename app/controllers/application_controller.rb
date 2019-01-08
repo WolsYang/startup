@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-	before_action :set_locale, :set_timezone
-
+	before_action :set_locale, :set_timezone, :current_user
+	
 	def set_locale
 	  # 可以將 ["en", "zh-TW"] 設定為 VALID_LANG 放到 config/environment.rb 中
 	  if params[:locale] && I18n.available_locales.include?( params[:locale].to_sym )
@@ -16,4 +16,18 @@ class ApplicationController < ActionController::Base
 			#Time.zone = current_user.time_zone
 		#end
 	end
+	
+	private
+	  def current_user
+		@current_user ||= session[:user_id] && User.find(session[:user_id])
+	  end
+
+	  def check_login
+		if !current_user
+		  redirect_to login_path
+		end
+	  end
+
+	helper_method :current_user, :check_login
+
 end

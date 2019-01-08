@@ -2,9 +2,7 @@
 <html>
   <head>
     <title>Startup</title>
-	<%= check_login %>
-	<%= "hi " + current_user.name%>
-	<%= link_to "登出", logout_path(), method: "delete", data: { confirm: "確認登出" } %>
+	<%= "尚未登入" %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
