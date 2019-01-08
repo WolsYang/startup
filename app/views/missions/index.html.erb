@@ -4,6 +4,12 @@
 	<%= Time.zone.now.to_date %>
 	<%= link_to t("add")+t("view.mission"), new_mission_path %>
 	<%= link_to t("view.user")+t("list"), users_path %>
+	
+	<%= form_tag missions_path, :method => :get do %>
+		<%= text_field_tag "keyword", nil, placeholder: '請輸入關鍵字...', :class=>"form-control"%>
+		<%= submit_tag "Search" %>
+	<% end %>
+	
   <table>
     <thead>
       <tr>

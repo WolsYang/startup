@@ -5,6 +5,9 @@ class MissionsController < ApplicationController
 	def index
 		sort_by = (params[:order] == 'end_date') ? 'end_date' : 'created_at'
 		@missions =Mission.order(sort_by)
+		if params[:keyword]
+			@missions = Mission.where( [ "name like ? or content like ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%"] )
+		end
 		#@missions =Mission.order(sort_by :desc)
 		#@missions =Mission.order(end_date: :desc)
 	end
@@ -74,7 +77,7 @@ class MissionsController < ApplicationController
 	
 	private
     def mission_params
-      params.require(:mission).permit(:name, :kind, :content, :state, :level, :end_date, :supervisor , :user_id , :order)
+      params.require(:mission).permit(:name, :kind, :content, :state, :level, :end_date, :supervisor, :user_id, :order, :keyword)
     end
 	
 	def find_mission
