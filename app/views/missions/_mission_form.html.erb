@@ -1,24 +1,17 @@
-  <%= form_for(mission) do |f| %>
-    <%= f.label :name, t("view.mission") + t("name") %>
-    <%= f.text_field :name %> <br />
+  <%= simple_form_for(mission) do |f| %>
 
-    <%= f.label :kind, t("view.type") %>
-    <%= f.text_field :kind %> <br />
+    <%= f.input :name, label: t("view.mission") + t("name"), error: '請輸入任務名稱' %>
+    <%= f.input :kind, label: t("view.type") %>
+    <%= f.input :content, label: t("view.information"), error: '請輸入內容' %>
 
-    <%= f.label :content, t("view.information") %>
-    <%= f.text_area :content %> <br />
-	
-	<%= f.label :state, t("view.state") %>
+	<%= f.label :state, t("view.state") %><br />
 	<%= f.select(:state, [['待處理', 1], ['進行中', 2], ['已結束', 3]]) %><br />
 
-	<%= f.label :level, t("view.important_level") %>
+	<%= f.label :level, t("view.important_level") %><br />
 	<%= f.select(:level, [['首要', 1], ['優先', 2], ['可延宕', 3], ['無DL', 4]]) %><br />
-	
-    <%= f.label :end_date, t("view.end_day") %>
-	<%= date_select :mission, :end_date %><br/>
-	
-	<%= f.label :supervisor, t("view.supervisor") %>
-    <%= f.text_field :supervisor %> <br />
+
+	<%= f.input :end_date, as: :date, label: '結束日期' %>
+	<%= f.input :supervisor, label: t("view.supervisor") %>
 
 	<% if @mission.errors.any? %>
 	<div id="error_explanation">

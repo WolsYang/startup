@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_06_155225) do
+ActiveRecord::Schema.define(version: 2019_01_15_055711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2019_01_06_155225) do
     t.integer "level"
     t.integer "user_logs_count"
     t.date "end_date"
+    t.integer "works_count"
+    t.string "create_by"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_01_06_155225) do
     t.integer "mission_logs_count"
     t.string "time_zone"
     t.string "password_digest"
+    t.integer "works_count"
   end
 
   create_table "works", force: :cascade do |t|
@@ -44,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_01_06_155225) do
     t.bigint "mission_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "works_count"
     t.index ["mission_id"], name: "index_works_on_mission_id"
     t.index ["user_id"], name: "index_works_on_user_id"
   end

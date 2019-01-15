@@ -1,12 +1,8 @@
-<%= form_for @user do |f| %>
-  <%= f.label :name, '用戶名' %><br />
-  <%= f.text_field :name %><br />
-  <%= f.label :email, 'Email' %><br />
-  <%= f.text_field :email %><br />
-  <%= f.label :password, '密碼' %><br />
-  <%= f.password_field :password %><br />
-  <%= f.label :password_confirmation, '確認密碼' %><br />
-  <%= f.password_field :password_confirmation %><br />
-  <%= f.submit '送出' %>
+<%= simple_form_for @user do |f| %>
+  <%= f.input :name, label: '用戶名', error: '請輸入用戶名' %><br />
+  <%= f.input :email, label: 'Email', error: '請輸入email' %><br />
+  <%= f.input :password, lable: '密碼', error: ' 請輸入密碼' %><br />
+  <%= f.input :password_confirmation, label: '確認密碼', error: '請確認密碼' %><br />
+  <%= f.button  :submit, lable:  '送出' %>
 
 <% end %>

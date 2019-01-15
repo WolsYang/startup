@@ -1,0 +1,32 @@
+  <table class="table">
+    <thead>
+      <tr>
+        <td><%= t("view.mission") + t("name") %></td>
+        <td><%= t("view.type") %></td>
+        <td><%= t("view.information") %></td>
+        <td><%= t("view.state") %></td>
+		<td><%= t("view.important_level") %></td>
+		<td><%= link_to t("view.end_day"), missions_path(:order => 'end_date'), method: "get" %></td>
+		<td><%= t("view.supervisor") %></td>
+		<td><%= t("view.users") %></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% missions.each do |mission| %>
+      <tr>
+	     <td><%= mission.name %>
+        <td><%= mission.kind %></td>
+        <td><%= mission.content %></td>
+        <td><%= mission.state %></td>
+		    <td><%= mission.level %></td>
+		    <td><%= mission.end_date %></td>
+		    <td><%= mission.supervisor %></td>
+		    <td><%= link_to mission.users.size, m_users_mission_path(mission), method: "get" %></td>
+        <td>
+          <%= link_to t("edit"), edit_mission_path(mission) %>
+          <%= link_to t("delete"), mission_path(mission), method: "delete", data: { confirm: t("confirm_delete") } , class:"btn btn-danger btn-xs" %>
+        </td>		
+      </tr>
+      <% end %>
+    </tbody>
+  </table>

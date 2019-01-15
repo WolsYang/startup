@@ -2,15 +2,17 @@ class MissionsController < ApplicationController
 	before_action :check_login
 	before_action :find_mission, only: [:edit, :update, :destroy, :m_users, :add_user_to]
 	before_action :chek_user_state, only: [:add_user_to]
-	def index
+	before_action :validates_search_key, only: [:search]
+	
+	def index 
 		sort_by = (params[:order] == 'end_date') ? 'end_date' : 'created_at'
-		@missions =Mission.order(sort_by)
-		if params[:keyword]
-			@missions = Mission.where( [ "name like ? or content like ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%"] )
-		end
-		#@missions =Mission.order(sort_by :desc)
-		#@missions =Mission.order(end_date: :desc)
+		@missions =Mission.order(sort_by).page(params[:page]).per(5)
+		puts @current_user
 	end
+
+ 	def search
+ 		@missions = Mission.ransack({:name_or_content_cont => @q}).result(distinct: true).page(params[:page]).per(5)
+  	end
 	
 	#C
 	def new
@@ -43,26 +45,25 @@ class MissionsController < ApplicationController
     end
 	#D
 	def destroy
-      @mission.destroy if @mission
-      redirect_to missions_path, notice: "任務資料已刪除!"
+		if @mission.users.size >0
+			redirect_to missions_path, notice: "任務尚有人員未刪除!"
+		else	
+    		@mission.destroy if @mission
+      		redirect_to missions_path, notice: "任務資料已刪除!"
+      	end
     end
 	
-	#list mission's user
-	#試試把目前的任務先記錄下來
 	def m_users
 		@users = @mission.users.all
 		@now_mission = Mission.find(params[:id])
-		#return @mission  #為什麼不能回傳
 	end
 	
-	def rm_user #為啥抓不到m_user
-	  work = Work.find_by(mission_id: params[:mission_id], user_id: params[:id])
-	  work.destroy
-	  #user = User.find_by(id: params[:mission_id])
-	  #mission = Mission.find_by(id: params[:id])
-	  #if mission
-		#出現錯誤mission.users.destroy(user)
-	  #end
+	def rm_user 
+	  #work = Work.find_by(mission_id: params[:mission_id], user_id: params[:id])
+	  #work.destroy
+	  user = User.find_by(id: params[:id])
+	  mission = Mission.find_by(id: params[:mission_id])
+	  mission.users.destroy(user)
 	  redirect_to missions_path, notice: "任務資料已刪除!"
 	end
 	
@@ -75,9 +76,10 @@ class MissionsController < ApplicationController
 		end
 	end
 	
-	private
+private
+
     def mission_params
-      params.require(:mission).permit(:name, :kind, :content, :state, :level, :end_date, :supervisor, :user_id, :order, :keyword)
+      params.require(:mission).permit(:name, :kind, :content, :state, :level, :end_date, :supervisor, :order)
     end
 	
 	def find_mission
@@ -96,4 +98,14 @@ class MissionsController < ApplicationController
 		end
 		#return @user
 	end
+
+protected
+ 
+	def validates_search_key
+		if params[:query_string].blank?
+			redirect_to missions_path
+ 		else
+ 			@q = params[:query_string].gsub(/\\|\'|\/|\?/, "") if params[:query_string].present?
+ 		end
+ 	end
 end

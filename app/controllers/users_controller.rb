@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 	layout "login", only: [:login, :signup, :create_login_session]
 	
 	def  index	
-		@users = User.all
+		@users = User.all.page(params[:page]).per(5)
 	end
 	
 	def signup
@@ -32,9 +32,7 @@ class UsersController < ApplicationController
 	
 	
 	def create
-		puts "777777"
 		@user = User.new(user_params)
-		puts "888888"
 		if @user.save
 			#成功
 			redirect_to :login, notice: "新增人員成功"
@@ -59,7 +57,7 @@ class UsersController < ApplicationController
 	#D
 	def destroy
       @user.destroy if @user
-      redirect_to users_path, notice: "任務資料已刪除!"
+      redirect_to users_path, notice: "人員資料已刪除!"
     end
 
 	def add_user
