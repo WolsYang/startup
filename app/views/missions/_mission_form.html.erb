@@ -12,17 +12,18 @@
 
 	<%= f.input :end_date, as: :date, label: '結束日期' %>
 	<%= f.input :supervisor, label: t("view.supervisor") %>
+	<%='1111111111111' %></br>
+	<%= f.simple_fields_for :mission_tags do |m| %>
+	<%= '222222222222' %>
+    	<%= m.input :tag1 %>
+    	<%= m.input :tag2 %>
+    	<%= m.input :tag3 %>
+    	<%= m.input :tag4 %>
+    	<%= m.input :tag5 %>
+  	<% end %>
 
-	<% if @mission.errors.any? %>
-	<div id="error_explanation">
-		<h2><%= pluralize(@mission.errors.count, "error") %> 錯誤:</h2>
-		
-	<ul>
-	<% mission.errors.full_messages.each do |msg| %>
-	<li><%= msg %></li>
-	<% end %>
-	</ul>
-	<% end %>
+
+	
 	
     <%= f.submit %>
   <% end %>

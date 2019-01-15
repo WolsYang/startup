@@ -16,31 +16,31 @@ class MissionsController < ApplicationController
 
 	def new
 		@mission = Mission.new
+		@mission.mission_tags.build
 	end
 	
 	def create
 		@mission = Mission.new(mission_params)
+		@mission.mission_tags.build(mission_params[:mission_tags])
 		@mission.create_by = @current_user.name
 
-		if @mission.save
-			#成功
+		if @mission.save 
 			redirect_to missions_path, notice: "新增任務成功"
 		else
-			#失敗
-		render :new
+			render :new
 		end
 	end
 	
 	def edit
+		# @mission.mission_tags.build
     end
 	
 	def update
-	    if @mission.update(mission_params)
-	      # 成功
-	      redirect_to mission_path, notice: "任務更新成功!"
+
+	    if @mission.update(mission_params) #|| @mission.mission_tags.build(mission_params[:mission_tags])
+	        redirect_to missions_path, notice: "任務更新成功!"
 	    else
-	      # 失敗
-	      render :edit
+	        render :edit
 	    end
     end
 
@@ -79,7 +79,9 @@ class MissionsController < ApplicationController
 private
 
     def mission_params
-      params.require(:mission).permit(:name, :kind, :content, :state, :level, :end_date, :supervisor, :order)
+      params.require(:mission)
+      	.permit(:name, :kind, :content, :state, :level, :end_date, :supervisor, :order,
+      		mission_tags_atttributes: [:tag1, :tag2, :tag3, :tag4, :tag5])
     end
 	
 	def find_mission
