@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_15_055711) do
+ActiveRecord::Schema.define(version: 2019_01_15_075955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "mission_tags", force: :cascade do |t|
+    t.string "tag"
+    t.bigint "mission_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mission_id"], name: "index_mission_tags_on_mission_id"
+  end
 
   create_table "missions", force: :cascade do |t|
     t.string "name"
@@ -52,6 +60,7 @@ ActiveRecord::Schema.define(version: 2019_01_15_055711) do
     t.index ["user_id"], name: "index_works_on_user_id"
   end
 
+  add_foreign_key "mission_tags", "missions"
   add_foreign_key "works", "missions"
   add_foreign_key "works", "users"
 end

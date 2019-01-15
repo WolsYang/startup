@@ -5,10 +5,11 @@
         <td><%= t("view.type") %></td>
         <td><%= t("view.information") %></td>
         <td><%= t("view.state") %></td>
-		<td><%= t("view.important_level") %></td>
-		<td><%= link_to t("view.end_day"), missions_path(:order => 'end_date'), method: "get" %></td>
-		<td><%= t("view.supervisor") %></td>
-		<td><%= t("view.users") %></td>
+    		<td><%= t("view.important_level") %></td>
+    		<td><%= link_to t("view.end_day"), missions_path(:order => 'end_date'), method: "get" %></td>
+    		<td><%= t("view.supervisor") %></td>
+    		<td><%= t("view.users") %></td>
+        <td><%= "create_by" %></td>>
       </tr>
     </thead>
     <tbody>
@@ -22,9 +23,10 @@
 		    <td><%= mission.end_date %></td>
 		    <td><%= mission.supervisor %></td>
 		    <td><%= link_to mission.users.size, m_users_mission_path(mission), method: "get" %></td>
+        <td><%= mission.create_by %></td>
         <td>
-          <%= link_to t("edit"), edit_mission_path(mission) %>
-          <%= link_to t("delete"), mission_path(mission), method: "delete", data: { confirm: t("confirm_delete") } , class:"btn btn-danger btn-xs" %>
+          <%= link_to t("edit"), edit_mission_path(mission), class:"btn btn-primary btn-xs" %>
+          <%= link_to t("delete"), mission_path(mission), method: "delete", data: { confirm: t("confirm_delete") }, class:"btn btn-danger btn-xs" %>
         </td>		
       </tr>
       <% end %>

@@ -1,27 +1,27 @@
 class MissionsController < ApplicationController
 	before_action :check_login
 	before_action :find_mission, only: [:edit, :update, :destroy, :m_users, :add_user_to]
-	before_action :chek_user_state, only: [:add_user_to]
+	before_action :chek_user, only: [:add_user_to]
 	before_action :validates_search_key, only: [:search]
-	
+	before_action :check_create_by, only: [:update, :destroy, :m_users, :rm_user, :add_user_to]
+
 	def index 
 		sort_by = (params[:order] == 'end_date') ? 'end_date' : 'created_at'
-		@missions =Mission.order(sort_by).page(params[:page]).per(5)
-		puts @current_user
+		@missions =Mission.where(create_by: @current_user.name).order(sort_by).page(params[:page]).per(5)
 	end
 
  	def search
- 		@missions = Mission.ransack({:name_or_content_cont => @q}).result(distinct: true).page(params[:page]).per(5)
+ 		@missions = Mission.ransack( name_or_content_cont: @q, create_by_eq: @current_user.name ).result(distinct: true).page(params[:page]).per(5)
   	end
-	
-	#C
+
 	def new
 		@mission = Mission.new
 	end
 	
 	def create
 		@mission = Mission.new(mission_params)
-		
+		@mission.create_by = @current_user.name
+
 		if @mission.save
 			#成功
 			redirect_to missions_path, notice: "新增任務成功"
@@ -30,20 +30,20 @@ class MissionsController < ApplicationController
 		render :new
 		end
 	end
-	#U
+	
 	def edit
     end
 	
 	def update
-      if @mission.update(mission_params)
-        # 成功
-        redirect_to mission_path, notice: "任務更新成功!"
-      else
-        # 失敗
-        render :edit
-      end
+	    if @mission.update(mission_params)
+	      # 成功
+	      redirect_to mission_path, notice: "任務更新成功!"
+	    else
+	      # 失敗
+	      render :edit
+	    end
     end
-	#D
+
 	def destroy
 		if @mission.users.size >0
 			redirect_to missions_path, notice: "任務尚有人員未刪除!"
@@ -53,7 +53,7 @@ class MissionsController < ApplicationController
       	end
     end
 	
-	def m_users
+	def m_users #該任務處理人員
 		@users = @mission.users.all
 		@now_mission = Mission.find(params[:id])
 	end
@@ -64,7 +64,7 @@ class MissionsController < ApplicationController
 	  user = User.find_by(id: params[:id])
 	  mission = Mission.find_by(id: params[:mission_id])
 	  mission.users.destroy(user)
-	  redirect_to missions_path, notice: "任務資料已刪除!"
+	  redirect_to missions_path, notice: "人員已移除!"
 	end
 	
 	def add_user_to
@@ -86,7 +86,7 @@ private
 		@mission = Mission.find_by(id: params[:id])
 	end
 	
-	def chek_user_state
+	def chek_user
 		if params[:user][:name].blank? 
 			@user = User.find_by(id: params[:mission][:user_ids])
 			@user_id = @user.id
@@ -96,7 +96,12 @@ private
 		elsif User.exists?(name: params[:user][:name]) == false
 			redirect_to m_users_mission_path, notice: "此人員不存在"
 		end
-		#return @user
+	end
+
+	def check_create_by
+		unless @mission.create_by == @current_user.name
+			redirect_to missions_path, notice: "這並非您擁有的任務喔!"
+		end		
 	end
 
 protected
