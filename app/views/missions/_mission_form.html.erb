@@ -12,15 +12,13 @@
 
 	<%= f.input :end_date, as: :date, label: '結束日期' %>
 	<%= f.input :supervisor, label: t("view.supervisor") %>
-	<%='1111111111111' %></br>
 	<%= f.simple_fields_for :mission_tags do |m| %>
-	<%= '222222222222' %>
     	<%= m.input :tag1 %>
     	<%= m.input :tag2 %>
     	<%= m.input :tag3 %>
     	<%= m.input :tag4 %>
     	<%= m.input :tag5 %>
-  	<% end %>
+    <% end %>
 
 
 	

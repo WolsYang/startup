@@ -32,7 +32,7 @@ class MissionsController < ApplicationController
 	end
 	
 	def edit
-		# @mission.mission_tags.build
+			@mission.mission_tags.build
     end
 	
 	def update
@@ -81,7 +81,7 @@ private
     def mission_params
       params.require(:mission)
       	.permit(:name, :kind, :content, :state, :level, :end_date, :supervisor, :order,
-      		mission_tags_atttributes: [:tag1, :tag2, :tag3, :tag4, :tag5])
+      		mission_tags_attributes: [:tag1, :tag2, :tag3, :tag4, :tag5])
     end
 	
 	def find_mission
