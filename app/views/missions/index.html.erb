@@ -1,0 +1,20 @@
+<h1><%= t("view.mission") + t("list") %></h1>
+	<%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
+	<%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
+	<%= Time.zone.now.to_date %>
+	<%= link_to t("add")+t("view.mission"), new_mission_path %>
+	<%= link_to t("view.user")+t("list"), users_path %>
+  <%= form_tag search_missions_path, method: :get, class: 'questions-search-form'  do %>
+    <div class="input-group input-group-lg">
+      <input type="text" class="form-control" name="query_string" placeholder="關鍵字..">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-info btn-lg" >搜尋
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </span>
+    </div>
+  <% end %>
+
+<%= render "index_form", missions: @missions %>
+
+<%= paginate @missions %>

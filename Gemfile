@@ -3,10 +3,35 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.5'
 
+gem 'autoprefixer-rails'
+gem 'bootstrap', '~> 4.2.1'
+gem 'jquery-rails'
+gem 'simple_form'
+gem 'cancancan', '~> 2.0'
+
+gem 'kaminari'
+
+gem 'ransack'
+
+gem 'bcrypt'
+
+gem "rails-i18n"
+
+group :test, :development do
+  gem "rspec-rails"
+  gem 'faker'
+end
+
+group :test do
+  gem 'fabrication'
+end
+
+gem 'pg'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -14,7 +39,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'duktape'
+#gem 'duktape' 造成bootstrap錯誤 故先關掉
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

@@ -1,0 +1,28 @@
+<h1><%= t("view.user") + t("list") %></h1>
+
+  <%= link_to t("add") + t("view.user"), signup_path %>
+
+  <table>
+    <thead>
+      <tr>
+        <td><%= t("name") %></td>
+        <td><%= t("view.email") %></td>
+        <td><%= t("view.root") %></td>
+		<td><%= t("view.missions") %></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.each do |user| %>
+      <tr>
+	    <td><%= user.name %>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+		<td><%= link_to user.missions.size, u_missions_user_path(user), method: "get" %></td>
+        <td>
+          <%= link_to t("edit"), edit_user_path(user) %>
+          <%= link_to t("delete"), user_path(user), method: "delete", data: { confirm: t("confirm_delete") } %>
+        </td>		
+      </tr>
+      <% end %>
+    </tbody>
+  </table>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <div class="container">
+    <title>Startup</title>
+	  <%= "尚未登入" %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </div>
+  </head>
+
+  <body>
+    <div class="container">
+    <%= notice %>
+    </div>
+    <div class="container">
+    <%= yield %>
+    </div>
+  </body>
+</html>

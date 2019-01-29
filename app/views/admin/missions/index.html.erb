@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Admin Missions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_missions.each do |admin_mission| %>
+      <tr>
+        <td><%= link_to 'Show', admin_mission %></td>
+        <td><%= link_to 'Edit', edit_admin_mission_path(admin_mission) %></td>
+        <td><%= link_to 'Destroy', admin_mission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Admin Mission', new_admin_mission_path %>

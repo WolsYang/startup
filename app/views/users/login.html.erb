@@ -1,0 +1,8 @@
+<%= form_tag "create_login_session" do %>
+    <%= label_tag "信箱" %>
+    <%= text_field_tag :email ,params[:email] %></br>
+    <%= label_tag "密碼" %>
+    <%= password_field_tag :password, params[:password] %></br>
+    <%= submit_tag "登錄" %>
+<% end %>
+<%= link_to t("add") + t("view.user"), signup_path %>
