@@ -5,7 +5,9 @@ class UsersController < ApplicationController
 	layout "login", only: [:login, :signup, :create_login_session]
 	
 	def  index	
-		@users = User.all.page(params[:page]).per(5)
+		@user = @current_user
+		#redirect_to :action => "edit", :id => @user.id
+		#@users = User.all.page(params[:page]).per(5)
 	end
 	
 	def signup
@@ -87,7 +89,7 @@ class UsersController < ApplicationController
 	
 	private
     def user_params
-      params.require(:user).permit(:name, :email, :root, :mission_ids, :user, :password)
+      params.require(:user).permit(:name, :email, :mission_ids, :user, :password)
     end
 	
 	def find_user

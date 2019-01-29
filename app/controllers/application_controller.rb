@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
 	before_action :set_locale, :set_timezone, :current_user
 	
+	rescue_from CanCan::AccessDenied do |exception|  #沒權限的用戶會被導回首頁
+    	redirect_to root_path, :alert => exception.message
+    end
+
 	def set_locale
 	  # 可以將 ["en", "zh-TW"] 設定為 VALID_LANG 放到 config/environment.rb 中
 	  if params[:locale] && I18n.available_locales.include?( params[:locale].to_sym )

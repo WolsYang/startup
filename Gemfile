@@ -7,6 +7,7 @@ gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.2.1'
 gem 'jquery-rails'
 gem 'simple_form'
+gem 'cancancan', '~> 2.0'
 
 gem 'kaminari'
 

@@ -1,4 +1,6 @@
 class MissionsController < ApplicationController
+	load_and_authorize_resource
+
 	before_action :check_login
 	before_action :find_mission, only: [:edit, :update, :destroy, :m_users, :add_user_to]
 	before_action :chek_user, only: [:add_user_to]
@@ -53,9 +55,9 @@ class MissionsController < ApplicationController
       	end
     end
 	
-	def m_users #該任務處理人員
+	def m_users #該任務所有處理人員
 		@users = @mission.users.all
-		@now_mission = Mission.find(params[:id])
+		#@now_mission = Mission.find(params[:id])
 	end
 	
 	def rm_user 

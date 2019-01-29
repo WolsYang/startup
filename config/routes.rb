@@ -7,21 +7,20 @@ Rails.application.routes.draw do
   post "create_login_session" => "users#create_login_session"
   delete "logout" => "users#logout", :as => "logout"
   
-  resources :missions do
-    collection do
-      get :search 
+  namespace :admin do
+    resources :missions do
+      collection do
+        get :search 
+      end
+    get :m_users, on: :member
+  	post :add_user_to , on: :member
+    resources :rm_user, only: [:destroy], :controller => "missions", :action => "rm_user"
     end
 
-    get :m_users, on: :member
-	  post :add_user_to , on: :member
-
-	  resources :rm_user, only: [:destroy], :controller => "missions", :action => "rm_user"
+    resources :users do
+    	get :u_missions, on: :member
+    	post :add_mission_to , on: :member 
+    	resources :rm_mission, only: [:destroy], :controller => "users", :action => "rm_mission"
+    end	
   end
-
-  resources :users do
-  	get :u_missions, on: :member
-  	post :add_mission_to , on: :member 
-  	resources :rm_mission, only: [:destroy], :controller => "users", :action => "rm_mission"
-  end	
-
 end

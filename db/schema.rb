@@ -10,22 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_15_112434) do
+ActiveRecord::Schema.define(version: 2019_01_28_114720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "mission_tags", force: :cascade do |t|
-    t.bigint "mission_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "tag1"
-    t.string "tag2"
-    t.string "tag3"
-    t.string "tag4"
-    t.string "tag5"
-    t.index ["mission_id"], name: "index_mission_tags_on_mission_id"
-  end
 
   create_table "missions", force: :cascade do |t|
     t.string "name"
@@ -45,13 +33,13 @@ ActiveRecord::Schema.define(version: 2019_01_15_112434) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.integer "root"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "mission_logs_count"
     t.string "time_zone"
     t.string "password_digest"
     t.integer "works_count"
+    t.string "role"
   end
 
   create_table "works", force: :cascade do |t|
@@ -64,7 +52,6 @@ ActiveRecord::Schema.define(version: 2019_01_15_112434) do
     t.index ["user_id"], name: "index_works_on_user_id"
   end
 
-  add_foreign_key "mission_tags", "missions"
   add_foreign_key "works", "missions"
   add_foreign_key "works", "users"
 end
